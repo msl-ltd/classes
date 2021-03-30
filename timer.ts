@@ -1,24 +1,24 @@
 class Timer {
     private handler: Function;
-    private id: number = null;
+    private handle: number = null;
 
     public setTimeout(handler: Function, timeout?: number, ...argument: any[]): void {
         this.handler = handler;
 
         this.clearTimeout();
-        this.id = window.setTimeout(this.callback.bind(this), timeout, argument);
+        this.handle = window.setTimeout(this.callback.bind(this), timeout, argument);
     }
 
     public clearTimeout(): void {
-        if (this.id !== null) {
-            window.clearTimeout(this.id);
+        if (this.handle !== null) {
+            window.clearTimeout(this.handle);
 
-            this.id = null;
+            this.handle = null;
         }
     }
 
     private callback(...argument: any[]): void {
-        this.id = null;
+        this.handle = null;
 
         this.handler(argument);
     }
