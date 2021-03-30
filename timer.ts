@@ -1,8 +1,8 @@
 class Timer {
-    private handler: TimerHandler;
+    private handler: Function;
     private id: number = null;
 
-    public setTimeout(handler: TimerHandler, timeout?: number, ...argument: any[]): void {
+    public setTimeout(handler: Function, timeout?: number, ...argument: any[]): void {
         this.handler = handler;
 
         this.clearTimeout();
@@ -20,17 +20,6 @@ class Timer {
     private callback(...argument: any[]): void {
         this.id = null;
 
-        switch (typeof this.handler) {
-            case 'string':
-                eval(this.handler);
-                break;
-
-            case 'function':
-                this.handler(argument);
-                break;
-
-            default:
-                break;
-        }
+        this.handler(argument);
     }
 }
